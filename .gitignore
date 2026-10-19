@@ -1,0 +1,60 @@
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Local model artifacts and conversion workspace
+release/
+work/
+results/
+*.safetensors
+*.gguf
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.msgpack
+*.npz
+*.log
+*.out
+*.tmp
+*.pid
+
+# Hugging Face and other model caches
+.cache/
+.huggingface/
+hf-cache/
+
+# Credentials and local configuration
+.env
+.env.*
+.netrc
+.auth.json
+auth.json
+tokens.json
+credentials.json
+secrets.*
+*.key
+*.pem
+id_rsa*
