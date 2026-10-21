@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/psf/requests.git",
+  "slug": "requests",
+  "revision": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+  "description": "Small, public, hand-labelled code-localization diagnostic. Not a held-out or comprehensive benchmark.",
+  "tasks": [
+    {
+      "id": "redirect-auth-decision",
+      "question": "Where does Requests determine whether authentication should be stripped when a redirect changes the host, scheme or port?",
+      "gold": [{"file": "src/requests/sessions.py", "start": 154, "end": 184, "anchor": "old_parsed.hostname != new_parsed.hostname"}]
+    },
+    {
+      "id": "redirect-auth-removal",
+      "question": "Where is an Authorization header actually deleted from a redirected request?",
+      "gold": [{"file": "src/requests/sessions.py", "start": 324, "end": 327, "anchor": "del headers[\"Authorization\"]"}]
+    },
+    {
+      "id": "environment-proxies",
+      "question": "Where are proxy settings and CA bundle overrides read from the process environment before sending a request?",
+      "gold": [{"file": "src/requests/sessions.py", "start": 844, "end": 860, "anchor": "get_environ_proxies(url"}]
+    },
+    {
+      "id": "retry-configuration",
+      "question": "Where does HTTPAdapter normalize the max_retries setting and initialize the connection pool?",
+      "gold": [{"file": "src/requests/adapters.py", "start": 201, "end": 221, "anchor": "Retry.from_int(max_retries)"}]
+    },
+    {
+      "id": "timeout-exceptions",
+      "question": "Where does the HTTP adapter translate urllib3 connection and read timeout errors into Requests exceptions?",
+      "gold": [
+        {"file": "src/requests/adapters.py", "start": 713, "end": 717, "anchor": "ConnectTimeout(e"},
+        {"file": "src/requests/adapters.py", "start": 738, "end": 743, "anchor": "ReadTimeout(e"}
+      ]
+    },
+    {
+      "id": "http-error-status",
+      "question": "Where does a response turn 4xx and 5xx status codes into an HTTPError exception?",
+      "gold": [{"file": "src/requests/models.py", "start": 1160, "end": 1171, "anchor": "raise HTTPError(http_error_msg"}]
+    },
+    {
+      "id": "stream-line-boundaries",
+      "question": "Where are streamed HTTP response chunks split into lines, including a pending partial line?",
+      "gold": [{"file": "src/requests/models.py", "start": 1010, "end": 1032, "anchor": "yield pending"}]
+    },
+    {
+      "id": "url-query-parameters",
+      "question": "Where are query parameters encoded and appended when preparing an HTTP URL?",
+      "gold": [{"file": "src/requests/models.py", "start": 545, "end": 562, "anchor": "_encode_params(params)"}]
+    },
+    {
+      "id": "basic-auth-header",
+      "question": "Where does HTTPBasicAuth attach an Authorization header to a prepared request?",
+      "gold": [{"file": "src/requests/auth.py", "start": 111, "end": 113, "anchor": "_basic_auth_str(self.username, self.password)"}]
+    },
+    {
+      "id": "response-hooks",
+      "question": "Where are response hook callbacks dispatched, and where can their return values replace the response?",
+      "gold": [{"file": "src/requests/hooks.py", "start": 39, "end": 48, "anchor": "_hook_data = hook(hook_data"}]
+    },
+    {
+      "id": "default-request-headers",
+      "question": "Where are the default User-Agent, Accept-Encoding, Accept and Connection headers constructed?",
+      "gold": [{"file": "src/requests/utils.py", "start": 951, "end": 962, "anchor": "\"Accept-Encoding\": DEFAULT_ACCEPT_ENCODING"}]
+    },
+    {
+      "id": "case-insensitive-headers",
+      "question": "Where does the case-insensitive dictionary retain the spelling of header keys but compare keys by lowercase?",
+      "gold": [{"file": "src/requests/structures.py", "start": 59, "end": 71, "anchor": "self._store[key.lower()] = (key, value)"}]
+    },
+    {
+      "id": "redirect-cookies",
+      "question": "Where does redirect handling extract cookies from a response and prepare cookies for the following request?",
+      "gold": [{"file": "src/requests/sessions.py", "start": 258, "end": 269, "anchor": "extract_cookies_to_jar(cookie_jar, req, resp.raw)"}]
+    },
+    {
+      "id": "response-text-decoding",
+      "question": "Where is response byte content decoded to Unicode with charset detection as a fallback?",
+      "gold": [{"file": "src/requests/models.py", "start": 1065, "end": 1088, "anchor": "self.apparent_encoding"}]
+    },
+    {
+      "id": "key-value-input-validation",
+      "question": "Where does to_key_val_list reject strings, booleans, or integers rather than treating them as key-value pairs?",
+      "gold": [{"file": "src/requests/utils.py", "start": 395, "end": 404, "anchor": "cannot encode objects that are not 2-tuples"}]
+    }
+  ]
+}
